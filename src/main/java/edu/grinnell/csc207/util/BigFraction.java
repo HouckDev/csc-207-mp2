@@ -29,7 +29,11 @@ public class BigFraction {
     String[] tokens = s.split("/");
 
     this.num = BigInteger.valueOf(Integer.valueOf(tokens[0]));
-    this.denom = BigInteger.valueOf(Integer.valueOf(tokens[1]));
+    if (tokens.length >= 2) {
+      this.denom = BigInteger.valueOf(Integer.valueOf(tokens[1]));
+    } else {
+      this.denom = BigInteger.valueOf(1);
+    }
   }
 
   /**

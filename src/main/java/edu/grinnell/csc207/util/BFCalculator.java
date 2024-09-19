@@ -9,21 +9,21 @@ public class BFCalculator {
   } // get
 
   public void add(BigFraction val) {
-    lastComputedValue.add(val);
+    lastComputedValue = lastComputedValue.add(val);
   } // add
 
   public void subtract(BigFraction val) {
-    lastComputedValue.subtract(val);
+    lastComputedValue = lastComputedValue.subtract(val);
 
   } // subtract
 
   public void multiply(BigFraction val) {
-    lastComputedValue.multiply(val);
+    lastComputedValue = lastComputedValue.multiply(val);
 
   } // multiply
 
   public void divide(BigFraction val) {
-    lastComputedValue.divide(val);
+    lastComputedValue = lastComputedValue.divide(val);
      
   } // divide
 

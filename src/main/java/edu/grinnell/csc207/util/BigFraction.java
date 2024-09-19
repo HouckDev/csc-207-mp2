@@ -3,38 +3,38 @@ package edu.grinnell.csc207.util;
 import java.math.BigInteger;
 
 public class BigFraction {
-  BigInteger numerator = BigInteger.valueOf(1);
-  BigInteger denominator = BigInteger.valueOf(1);
+  BigInteger num = BigInteger.valueOf(1);
+  BigInteger denom = BigInteger.valueOf(1);
 
   // Creates a fraction
   public BigFraction(BigInteger n,BigInteger d) {
-    this.numerator = n;
-    this.denominator = d;
+    this.num = n;
+    this.denom = d;
   }
   
   // Creates a whole number
   public BigFraction(BigInteger n) {
-    this.numerator = n;
-    this.denominator = BigInteger.valueOf(1);
+    this.num = n;
+    this.denom = BigInteger.valueOf(1);
   }
   
   /**
-   * Get the denominator of this fraction.
+   * Get the denom of this fraction.
    *
-   * @return the denominator
+   * @return the denom
    */
-  public BigInteger getDenominator() {
-    return this.denominator;
-  } // denominator()
+  public BigInteger denominator() {
+    return this.denom;
+  } // denom()
 
   /**
-   * Get the numerator of this fraction.
+   * Get the num of this fraction.
    *
-   * @return the numerator
+   * @return the num
    */
-  public BigInteger getNumerator() {
-    return this.numerator;
-  } // numerator()
+  public BigInteger numerator() {
+    return this.num;
+  } // num()
 
   /**
    * Add another faction to this fraction.
@@ -45,18 +45,18 @@ public class BigFraction {
    * @return the result of the addition.
    */
   public BigFraction add(BigFraction addend) {
-    BigInteger resultNumerator;
-    BigInteger resultDenominator;
+    BigInteger resultnum;
+    BigInteger resultdenom;
 
-    // The denominator of the result is the product of this object's
-    // denominator and addend's denominator
-    resultDenominator = this.denominator.multiply(addend.denominator);
-    // The numerator is more complicated
-    resultNumerator =
-      (this.numerator.multiply(addend.denominator)).add(addend.numerator.multiply(this.denominator));
+    // The denom of the result is the product of this object's
+    // denom and addend's denom
+    resultdenom = this.denom.multiply(addend.denom);
+    // The num is more complicated
+    resultnum =
+      (this.num.multiply(addend.denom)).add(addend.num.multiply(this.denom));
 
     // Return the computed value
-    return new BigFraction(resultNumerator, resultDenominator);
+    return new BigFraction(resultnum, resultdenom);
   } // add(BigFraction)
 
   /**
@@ -68,15 +68,15 @@ public class BigFraction {
    * @return the result of the subtraction.
    */
   public BigFraction subtract(BigFraction addend) {
-    BigInteger resultNumerator;
-    BigInteger resultDenominator;
+    BigInteger resultnum;
+    BigInteger resultdenom;
   
-    resultDenominator = this.denominator.multiply(addend.denominator);
-    resultNumerator =
-      (this.numerator.multiply(addend.denominator)).subtract(addend.numerator.multiply(this.denominator));
+    resultdenom = this.denom.multiply(addend.denom);
+    resultnum =
+      (this.num.multiply(addend.denom)).subtract(addend.num.multiply(this.denom));
 
     // Return the computed value
-    return new BigFraction(resultNumerator, resultDenominator);
+    return new BigFraction(resultnum, resultdenom);
   } // subtract(BigFraction)
 
   /**
@@ -88,14 +88,14 @@ public class BigFraction {
    * @return the result of the multiplication.
    */
   public BigFraction multiply(BigFraction addend) {
-    BigInteger resultNumerator;
-    BigInteger resultDenominator;
+    BigInteger resultnum;
+    BigInteger resultdenom;
 
-    resultDenominator = this.denominator.multiply(addend.denominator);
-    resultNumerator = this.numerator.multiply(addend.numerator);
+    resultdenom = this.denom.multiply(addend.denom);
+    resultnum = this.num.multiply(addend.num);
     
     // Return the computed value
-    return new BigFraction(resultNumerator, resultDenominator);
+    return new BigFraction(resultnum, resultdenom);
   } // multiply(BigFraction)
 
   /**
@@ -107,25 +107,25 @@ public class BigFraction {
    * @return the result of the division.
    */
   public BigFraction divide(BigFraction addend) {
-    BigInteger resultNumerator;
-    BigInteger resultDenominator;
+    BigInteger resultnum;
+    BigInteger resultdenom;
 
-     resultDenominator = this.denominator.multiply(addend.numerator);
-    resultNumerator = this.numerator.multiply(addend.denominator);
+     resultdenom = this.denom.multiply(addend.num);
+    resultnum = this.num.multiply(addend.denom);
     
     // Return the computed value
-    return new BigFraction(resultNumerator, resultDenominator);
+    return new BigFraction(resultnum, resultdenom);
   } // divide(BigFraction)
 
   public String toString() {
     // Special case: It's zero
-    if (this.numerator.equals(BigInteger.ZERO)) {
+    if (this.num.equals(BigInteger.ZERO)) {
       return "0";
     } // if it's zero
 
-    // Lump together the string represention of the numerator,
-    // a slash, and the string representation of the denominator
+    // Lump together the string represention of the num,
+    // a slash, and the string representation of the denom
     // return this.num.toString().concat("/").concat(this.denom.toString());
-    return this.numerator + "/" + this.denominator;
+    return this.num + "/" + this.denom;
   }
 }

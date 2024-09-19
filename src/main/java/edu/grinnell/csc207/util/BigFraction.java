@@ -6,18 +6,32 @@ public class BigFraction {
   BigInteger num = BigInteger.valueOf(1);
   BigInteger denom = BigInteger.valueOf(1);
 
-  // Creates a fraction
-  public BigFraction(BigInteger n,BigInteger d) {
+  // Creates a BigFraction from two ints
+  public BigFraction(int n, int d) {
+    this.num = BigInteger.valueOf(n);
+    this.denom = BigInteger.valueOf(d);
+  }
+
+  // Creates a BigFraction from two BigInts
+  public BigFraction(BigInteger n, BigInteger d) {
     this.num = n;
     this.denom = d;
   }
   
-  // Creates a whole number
-  public BigFraction(BigInteger n) {
-    this.num = n;
+  // Creates a BigFraction from one int (result is a whole number)
+  public BigFraction(int n) {
+    this.num = BigInteger.valueOf(n);
     this.denom = BigInteger.valueOf(1);
   }
   
+  // Creates a BigFraction from a string
+  public BigFraction(String s) {
+    String[] tokens = s.split("/");
+
+    this.num = BigInteger.valueOf(Integer.valueOf(tokens[0]));
+    this.denom = BigInteger.valueOf(Integer.valueOf(tokens[1]));
+  }
+
   /**
    * Get the denom of this fraction.
    *

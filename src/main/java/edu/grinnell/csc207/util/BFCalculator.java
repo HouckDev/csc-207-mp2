@@ -3,7 +3,7 @@ package edu.grinnell.csc207.util;
 import java.math.BigInteger;
 
 public class BFCalculator {
-  BigFraction lastComputedValue = new BigFraction(BigInteger.valueOf(0));
+  BigFraction lastComputedValue = new BigFraction(0);
   public BigFraction get() {
     return lastComputedValue;
   } // get
@@ -28,6 +28,6 @@ public class BFCalculator {
   } // divide
 
   public void clear() {
-    lastComputedValue = new BigFraction(BigInteger.valueOf(0));
+    lastComputedValue = new BigFraction(0);
   } // clear
 } // BFCalculator

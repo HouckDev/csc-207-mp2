@@ -74,13 +74,15 @@ public class InteractiveCalculator {
     }
     return false;
   }
-
   public static boolean isNumeric(String str) { 
-    try {  
-      Double.parseDouble(str);  
-      return true;
-    } catch(NumberFormatException e){  
-      return false;  
-    }  
+    for (int i = 0; i < str.length(); i++){
+      char c = str.charAt(i);        
+      
+      if (Character.isDigit(c) || c == '/') {
+      } else {
+        return false;
+      }
+    }
+    return true;
   }
 } // InteractiveCalculator

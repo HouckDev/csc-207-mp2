@@ -16,13 +16,13 @@ public class BigFraction {
   public BigFraction(BigInteger n, BigInteger d) {
     this.num = n;
     this.denom = d;
-  }
+  } // BigFraction(BigInt,BigInt)
   
   // Creates a BigFraction from one int (result is a whole number)
   public BigFraction(int n) {
     this.num = BigInteger.valueOf(n);
     this.denom = BigInteger.valueOf(1);
-  }
+  } // BigFraction(int)
   
   // Creates a BigFraction from a string
   public BigFraction(String s) {
@@ -33,8 +33,13 @@ public class BigFraction {
       this.denom = BigInteger.valueOf(Integer.valueOf(tokens[1]));
     } else {
       this.denom = BigInteger.valueOf(1);
-    }
-  }
+    } // if
+
+    //this is scuffed
+    BigFraction tempFrac = this.reduce();
+    this.num = tempFrac.numerator();
+    this.denom = tempFrac.denominator();
+  } // BigFraction(String)
 
   /**
    * Get the denom of this fraction.
@@ -128,22 +133,50 @@ public class BigFraction {
     BigInteger resultnum;
     BigInteger resultdenom;
 
-     resultdenom = this.denom.multiply(addend.num);
+    resultdenom = this.denom.multiply(addend.num);
     resultnum = this.num.multiply(addend.denom);
     
     // Return the computed value
     return new BigFraction(resultnum, resultdenom);
   } // divide(BigFraction)
 
+  /**
+   * Reduce this fraction.
+   *
+   * @return the result of the reduction.
+   */
+  public BigFraction reduce() {
+    
+    BigInteger resultnum;
+    BigInteger resultdenom;
+
+    resultdenom = this.denom.divide(greatestCommonDivisor(this.numerator(),this.denominator()));
+    resultnum = this.num.divide(greatestCommonDivisor(this.numerator(),this.denominator()));
+    
+    // Return the computed value
+    return new BigFraction(resultnum, resultdenom);
+  } // divide(BigFraction)
+  
+  private BigInteger greatestCommonDivisor(BigInteger bigInteger, BigInteger bigInteger2) {
+    if (bigInteger2==BigInteger.valueOf(0)) return bigInteger;
+    return greatestCommonDivisor(bigInteger2,bigInteger.mod(bigInteger2));
+  }
+
   public String toString() {
+    // this is bad since it technically changes the value when we call tostring
+    BigFraction reduced = this.reduce();
     // Special case: It's zero
-    if (this.num.equals(BigInteger.ZERO)) {
+    if (reduced.num.equals(BigInteger.ZERO)) {
       return "0";
     } // if it's zero
+    
+    if (reduced.denom.equals(BigInteger.valueOf(1))) {
+      return "" + reduced.num;
+    } // if it's whole
 
     // Lump together the string represention of the num,
     // a slash, and the string representation of the denom
     // return this.num.toString().concat("/").concat(this.denom.toString());
-    return this.num + "/" + this.denom;
+    return reduced.num + "/" + reduced.denom;
   }
 }

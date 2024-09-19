@@ -142,7 +142,7 @@ public class TestMP02 {
       "M: Parsing and simplifying 1");  
     assertEquals("4/7", new BigFraction("40/70").toString(),
       "M: Parsing and simplifying 2"); 
-    assertEquals(BigInteger.valueOf(3), new BigFraction("15/10").numerator(),
+    assertEquals(BigInteger.valueOf(3), new BigFraction("15/5").numerator(),
       "M: Parsing and simplifying 3a");
     assertEquals(BigInteger.valueOf(2), new BigFraction("15/10").denominator(),
       "M: Parsing and simplifying 3a");

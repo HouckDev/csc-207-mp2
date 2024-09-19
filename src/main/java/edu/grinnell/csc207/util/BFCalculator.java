@@ -3,7 +3,6 @@ package edu.grinnell.csc207.util;
 import java.math.BigInteger;
 
 public class BFCalculator {
-  BFRegister register = new BFRegister();
   BigFraction lastComputedValue = new BigFraction(BigInteger.valueOf(0));
   public BigFraction get() {
     return lastComputedValue;

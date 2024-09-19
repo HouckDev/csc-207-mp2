@@ -2,29 +2,52 @@ package edu.grinnell.csc207.util;
 
 import java.math.BigInteger;
 
+/**
+ * Fraction represented by two BigIntegers.
+ */
 public class BigFraction {
+  /**
+   * Numerator of the fraction.
+   */
   BigInteger num = BigInteger.valueOf(1);
+  /**
+   * Denomiator of the fraction.
+   */
   BigInteger denom = BigInteger.valueOf(1);
 
-  // Creates a BigFraction from two ints
+  /**
+   * Creates a BigFraction from two ints.
+   * @param n
+   * @param d
+   */
   public BigFraction(int n, int d) {
     this.num = BigInteger.valueOf(n);
     this.denom = BigInteger.valueOf(d);
-  }
+  } // BigFraction(int,int)
 
-  // Creates a BigFraction from two BigInts
+  /**
+   * Creates a BigFraction from two BigInts.
+   * @param n
+   * @param d
+   */
   public BigFraction(BigInteger n, BigInteger d) {
     this.num = n;
     this.denom = d;
   } // BigFraction(BigInt,BigInt)
-  
-  // Creates a BigFraction from one int (result is a whole number)
+
+  /**
+   * Creates a BigFraction from one int (result is a whole number).
+   * @param n
+   */
   public BigFraction(int n) {
     this.num = BigInteger.valueOf(n);
     this.denom = BigInteger.valueOf(1);
   } // BigFraction(int)
-  
-  // Creates a BigFraction from a string
+
+  /**
+   * Creates a BigFraction from a string.
+   * @param s
+   */
   public BigFraction(String s) {
     String[] tokens = s.split("/");
 
@@ -35,7 +58,7 @@ public class BigFraction {
       this.denom = BigInteger.valueOf(1);
     } // if
 
-    //this is scuffed
+    // this is scuffed
     BigFraction tempFrac = this.reduce();
     this.num = tempFrac.numerator();
     this.denom = tempFrac.denominator();
@@ -63,7 +86,7 @@ public class BigFraction {
    * Add another faction to this fraction.
    *
    * @param addend
-   *   The fraction to add.
+   *               The fraction to add.
    *
    * @return the result of the addition.
    */
@@ -75,8 +98,7 @@ public class BigFraction {
     // denom and addend's denom
     resultdenom = this.denom.multiply(addend.denom);
     // The num is more complicated
-    resultnum =
-      (this.num.multiply(addend.denom)).add(addend.num.multiply(this.denom));
+    resultnum = (this.num.multiply(addend.denom)).add(addend.num.multiply(this.denom));
 
     // Return the computed value
     return new BigFraction(resultnum, resultdenom);
@@ -86,17 +108,16 @@ public class BigFraction {
    * Subtract another fraction from this fraction.
    *
    * @param addend
-   *   The fraction to subtract.
+   *               The fraction to subtract.
    *
    * @return the result of the subtraction.
    */
   public BigFraction subtract(BigFraction addend) {
     BigInteger resultnum;
     BigInteger resultdenom;
-  
+
     resultdenom = this.denom.multiply(addend.denom);
-    resultnum =
-      (this.num.multiply(addend.denom)).subtract(addend.num.multiply(this.denom));
+    resultnum = (this.num.multiply(addend.denom)).subtract(addend.num.multiply(this.denom));
 
     // Return the computed value
     return new BigFraction(resultnum, resultdenom);
@@ -106,7 +127,7 @@ public class BigFraction {
    * Multiply with another fraction.
    *
    * @param addend
-   *   The fraction to multiply.
+   *               The fraction to multiply.
    *
    * @return the result of the multiplication.
    */
@@ -116,7 +137,7 @@ public class BigFraction {
 
     resultdenom = this.denom.multiply(addend.denom);
     resultnum = this.num.multiply(addend.num);
-    
+
     // Return the computed value
     return new BigFraction(resultnum, resultdenom);
   } // multiply(BigFraction)
@@ -125,7 +146,7 @@ public class BigFraction {
    * Divide with another fraction.
    *
    * @param addend
-   *   The fraction to divide with.
+   *               The fraction to divide with.
    *
    * @return the result of the division.
    */
@@ -135,7 +156,7 @@ public class BigFraction {
 
     resultdenom = this.denom.multiply(addend.num);
     resultnum = this.num.multiply(addend.denom);
-    
+
     // Return the computed value
     return new BigFraction(resultnum, resultdenom);
   } // divide(BigFraction)
@@ -146,22 +167,34 @@ public class BigFraction {
    * @return the result of the reduction.
    */
   public BigFraction reduce() {
-    
+
     BigInteger resultnum;
     BigInteger resultdenom;
 
-    resultdenom = this.denom.divide(greatestCommonDivisor(this.numerator(),this.denominator()));
-    resultnum = this.num.divide(greatestCommonDivisor(this.numerator(),this.denominator()));
-    
+    resultdenom = this.denom.divide(greatestCommonDivisor(this.numerator(), this.denominator()));
+    resultnum = this.num.divide(greatestCommonDivisor(this.numerator(), this.denominator()));
+
     // Return the computed value
     return new BigFraction(resultnum, resultdenom);
   } // divide(BigFraction)
-  
-  private BigInteger greatestCommonDivisor(BigInteger bigInteger, BigInteger bigInteger2) {
-    if (bigInteger2==BigInteger.valueOf(0)) return bigInteger;
-    return greatestCommonDivisor(bigInteger2,bigInteger.mod(bigInteger2));
-  }
 
+  /**
+   * Creates a BigFraction from a string.
+   * @param bigInteger
+   * @param bigInteger2
+   * @return returns gdc as a BigInteger
+   */
+  private BigInteger greatestCommonDivisor(BigInteger bigInteger, BigInteger bigInteger2) {
+    if (bigInteger2 == BigInteger.valueOf(0)) {
+      return bigInteger;
+    } // if
+    return greatestCommonDivisor(bigInteger2, bigInteger.mod(bigInteger2));
+  } // greatestCommonDivisor(BigInt,BigInt)
+
+  /**
+   * To make maven happy.
+   * @return String
+   */
   public String toString() {
     // this is bad since it technically changes the value when we call tostring
     BigFraction reduced = this.reduce();
@@ -169,7 +202,7 @@ public class BigFraction {
     if (reduced.num.equals(BigInteger.ZERO)) {
       return "0";
     } // if it's zero
-    
+
     if (reduced.denom.equals(BigInteger.valueOf(1))) {
       return "" + reduced.num;
     } // if it's whole
@@ -178,5 +211,5 @@ public class BigFraction {
     // a slash, and the string representation of the denom
     // return this.num.toString().concat("/").concat(this.denom.toString());
     return reduced.num + "/" + reduced.denom;
-  }
-}
+  } // toString
+} // BigFraction

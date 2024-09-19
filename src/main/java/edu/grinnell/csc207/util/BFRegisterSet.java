@@ -2,20 +2,28 @@ package edu.grinnell.csc207.util;
 
 import java.util.HashMap;
 
+/**
+ * A register to hold BigFractions for use in calculations.
+ */
 public class BFRegisterSet {
-  HashMap<Character,BigFraction> register = new HashMap<Character,BigFraction>();
- 
   /**
-   * @param register
+   * The register's hash map for stored fractions.
+   */
+  HashMap<Character, BigFraction> register = new HashMap<Character, BigFraction>();
+
+  /**
+   * Sets value at key.
+   * @param key
    * @param val
    */
   public void store(char key, BigFraction val) {
-    register.put(key,val);
+    register.put(key, val);
   } // store
 
   /**
-   * @param register
-   * @return
+   * Returns the value at key of the register.
+   * @param key
+   * @return the value
    */
   public BigFraction get(char key) {
     return register.get(key);

@@ -13,8 +13,8 @@ public class BigFraction {
   }
   
   // Creates a whole number
-  public BigFraction(int n) {
-    this.numerator = BigInteger.valueOf(n);
+  public BigFraction(BigInteger n) {
+    this.numerator = n;
     this.denominator = BigInteger.valueOf(1);
   }
   

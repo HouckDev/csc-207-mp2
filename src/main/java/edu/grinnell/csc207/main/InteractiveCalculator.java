@@ -17,52 +17,9 @@ public class InteractiveCalculator {
       System.out.println("> " + lineInput);
       if (lineInput.toUpperCase().equals("EXIT")) {break;}
       
-      String[] tokens = lineInput.split(" ");
-      for (int i = 0; i < tokens.length; i++) {
-        BigFraction workingValue = new BigFraction(0);
-        if (!validCalculatorToken(tokens[i])) {
-          
-          if (isNumeric(tokens[i])) {
-            workingValue = new BigFraction(tokens[i]);
-          } else {
-            workingValue = register.get(tokens[i].charAt(0));
-          }
-          if (i == 0) {
-            calculator.clear();
-            calculator.add(workingValue);
-            continue;
-          }
-          if (!validCalculatorToken(tokens[i - 1])) {
-            calculator.clear();
-            calculator.add(workingValue);
-            continue;
-          }
-          continue;
-        }
+      //have the calculator parse the line
+      calculator.parseCalculation(lineInput,register);
 
-        if (isNumeric(tokens[i + 1])) {
-          workingValue = new BigFraction(tokens[i + 1]);
-        } else {
-          workingValue = register.get(tokens[i + 1].charAt(0));
-        }
-        switch (tokens[i]) {
-          case "+" :
-            calculator.add(workingValue);
-            break;
-          case "-" :
-            calculator.subtract(workingValue);
-            break;
-          case "*" :
-            calculator.multiply(workingValue);
-            break;
-          case "/" :
-            calculator.divide(workingValue);
-            break;
-          case "STORE" :
-            register.store(tokens[i + 1].charAt(0), calculator.get());;
-            break;
-        }
-      }
       System.out.println(calculator.get());
     } // while
   } // main

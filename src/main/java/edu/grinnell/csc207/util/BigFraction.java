@@ -70,17 +70,52 @@ public class BigFraction {
   public BigFraction subtract(BigFraction addend) {
     BigInteger resultNumerator;
     BigInteger resultDenominator;
-
-    // The denominator of the result is the product of this object's
-    // denominator and addend's denominator
+  
     resultDenominator = this.denominator.multiply(addend.denominator);
-    // The numerator is more complicated
     resultNumerator =
       (this.numerator.multiply(addend.denominator)).subtract(addend.numerator.multiply(this.denominator));
 
     // Return the computed value
     return new BigFraction(resultNumerator, resultDenominator);
-  } // add(BigFraction)
+  } // subtract(BigFraction)
+
+  /**
+   * Multiply with another fraction.
+   *
+   * @param addend
+   *   The fraction to multiply.
+   *
+   * @return the result of the multiplication.
+   */
+  public BigFraction multiply(BigFraction addend) {
+    BigInteger resultNumerator;
+    BigInteger resultDenominator;
+
+    resultDenominator = this.denominator.multiply(addend.denominator);
+    resultNumerator = this.numerator.multiply(addend.numerator);
+    
+    // Return the computed value
+    return new BigFraction(resultNumerator, resultDenominator);
+  } // multiply(BigFraction)
+
+  /**
+   * Divide with another fraction.
+   *
+   * @param addend
+   *   The fraction to divide with.
+   *
+   * @return the result of the division.
+   */
+  public BigFraction divide(BigFraction addend) {
+    BigInteger resultNumerator;
+    BigInteger resultDenominator;
+
+     resultDenominator = this.denominator.multiply(addend.numerator);
+    resultNumerator = this.numerator.multiply(addend.denominator);
+    
+    // Return the computed value
+    return new BigFraction(resultNumerator, resultDenominator);
+  } // divide(BigFraction)
 
   public String toString() {
     // Special case: It's zero

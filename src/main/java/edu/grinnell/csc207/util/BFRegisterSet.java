@@ -2,7 +2,7 @@ package edu.grinnell.csc207.util;
 
 import java.util.HashMap;
 
-public class BFRegister {
+public class BFRegisterSet {
   HashMap<Character,BigFraction> register = new HashMap<Character,BigFraction>();
  
   /**

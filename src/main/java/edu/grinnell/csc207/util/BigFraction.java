@@ -59,6 +59,29 @@ public class BigFraction {
     return new BigFraction(resultNumerator, resultDenominator);
   } // add(BigFraction)
 
+  /**
+   * Subtract another fraction from this fraction.
+   *
+   * @param addend
+   *   The fraction to subtract.
+   *
+   * @return the result of the subtraction.
+   */
+  public BigFraction subtract(BigFraction addend) {
+    BigInteger resultNumerator;
+    BigInteger resultDenominator;
+
+    // The denominator of the result is the product of this object's
+    // denominator and addend's denominator
+    resultDenominator = this.denominator.multiply(addend.denominator);
+    // The numerator is more complicated
+    resultNumerator =
+      (this.numerator.multiply(addend.denominator)).subtract(addend.numerator.multiply(this.denominator));
+
+    // Return the computed value
+    return new BigFraction(resultNumerator, resultDenominator);
+  } // add(BigFraction)
+
   public String toString() {
     // Special case: It's zero
     if (this.numerator.equals(BigInteger.ZERO)) {
